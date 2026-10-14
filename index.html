@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Макпал — дизайнер интерьера</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wall: #4a3526;
+      --wall-dark: #2c1f16;
+      --cream: #f3ebdf;
+      --cream-muted: rgba(243, 235, 223, 0.72);
+      --curtain-1: #d9c9b2;
+      --curtain-2: #efe4d3;
+      --curtain-3: #bba78c;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      overflow-x: hidden;
+      position: relative;
+      color: var(--cream);
+      font-family: "Montserrat", "Segoe UI", sans-serif;
+      /* Тёплая тёмно-коричневая стена */
+      background:
+        radial-gradient(ellipse at 30% 25%, rgba(120, 88, 62, 0.45), transparent 60%),
+        radial-gradient(ellipse at 15% 90%, rgba(255, 196, 130, 0.18), transparent 45%),
+        linear-gradient(180deg, var(--wall) 0%, var(--wall-dark) 100%);
+      background-color: var(--wall-dark);
+    }
+    /* Светлая штора справа */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 38%;
+      background:
+        linear-gradient(90deg, rgba(44, 31, 22, 0.85) 0%, rgba(44, 31, 22, 0) 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(44, 31, 22, 0.35) 100%),
+        repeating-linear-gradient(90deg,
+          var(--curtain-3) 0px,
+          var(--curtain-1) 9px,
+          var(--curtain-2) 18px,
+          var(--curtain-1) 27px,
+          var(--curtain-3) 36px);
+      opacity: 0.9;
+      z-index: 0;
+    }
+    /* Мягкое затемнение для читаемости текста */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 45% 35% at 50% 40%, rgba(30, 20, 14, 0.55) 0%, transparent 100%);
+      z-index: 0;
+    }
+    main {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 560px;
+    }
+    .logo {
+      display: block;
+      width: 64px;
+      height: 96px;
+      margin: 0 auto 32px;
+    }
+    .logo * {
+      fill: none;
+      stroke: var(--cream);
+      stroke-width: 2;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(44px, 11vw, 76px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .job {
+      margin: 0 0 44px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream-muted);
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 38px;
+      border: 1px solid var(--cream);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn:hover {
+      background: var(--cream);
+      color: var(--wall-dark);
+    }
+    /* Мебель: столик с лампой слева, кресла справа */
+    .decor {
+      position: fixed;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .decor-left { left: 2vw; height: 44vh; }
+    .decor-right { right: 0; height: 46vh; }
+    /* Тёмный пол внизу */
+    .floor {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 7vh;
+      background: linear-gradient(180deg, rgba(20, 13, 9, 0) 0%, rgba(20, 13, 9, 0.7) 100%);
+      z-index: 0;
+    }
+    @media (max-width: 600px) {
+      body::before { width: 30%; }
+      body { padding-bottom: 30vh; }
+      .decor-left { height: 28vh; left: 0; }
+      .decor-right { height: 30vh; }
+    }
+    @media (min-width: 601px) {
+      body { padding-bottom: 22vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floor"></div>
+
+  <!-- Столик с лампой -->
+  <svg class="decor decor-left" viewBox="0 0 300 400" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffd9a6" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#ffd9a6" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="shade" cx="50%" cy="85%" r="75%">
+        <stop offset="0%" stop-color="#fff6e6"/>
+        <stop offset="100%" stop-color="#e2c79f"/>
+      </radialGradient>
+      <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9a6a42"/>
+        <stop offset="100%" stop-color="#5b3920"/>
+      </linearGradient>
+      <linearGradient id="leg" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#4a2e1a"/>
+        <stop offset="50%" stop-color="#7a5232"/>
+        <stop offset="100%" stop-color="#4a2e1a"/>
+      </linearGradient>
+    </defs>
+    <circle cx="160" cy="170" r="150" fill="url(#glow)"/>
+    <ellipse cx="150" cy="396" rx="140" ry="8" fill="#140d09" opacity="0.6"/>
+    <!-- ножки -->
+    <rect x="148" y="262" width="9" height="138" fill="#3e2616"/>
+    <rect x="48" y="262" width="11" height="138" fill="url(#leg)"/>
+    <rect x="240" y="262" width="11" height="138" fill="url(#leg)"/>
+    <!-- столешница -->
+    <rect x="18" y="248" width="264" height="16" rx="8" fill="url(#wood)"/>
+    <!-- лампа -->
+    <ellipse cx="160" cy="246" rx="32" ry="5" fill="#6b4428"/>
+    <rect x="156" y="182" width="8" height="64" fill="#7a4e2e"/>
+    <path d="M96 186 A64 64 0 0 1 224 186 Z" fill="url(#shade)"/>
+  </svg>
+
+  <!-- Кресла -->
+  <svg class="decor decor-right" viewBox="0 0 600 400" aria-hidden="true">
+    <defs>
+      <linearGradient id="velvet" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b9794a"/>
+        <stop offset="100%" stop-color="#7a4424"/>
+      </linearGradient>
+      <linearGradient id="velvet-dark" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#9a5f36"/>
+        <stop offset="100%" stop-color="#5e331b"/>
+      </linearGradient>
+      <linearGradient id="arm" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#8c5230"/>
+        <stop offset="45%" stop-color="#c48656"/>
+        <stop offset="100%" stop-color="#8a4f2c"/>
+      </linearGradient>
+    </defs>
+    <!-- дальнее кресло -->
+    <g transform="translate(250 -20)">
+      <rect x="120" y="60" width="380" height="190" rx="60" fill="url(#velvet-dark)"/>
+    </g>
+    <!-- ближнее кресло -->
+    <rect x="130" y="70" width="480" height="200" rx="60" fill="url(#velvet)"/>
+    <rect x="110" y="240" width="490" height="170" rx="32" fill="url(#velvet-dark)"/>
+    <rect x="120" y="240" width="480" height="40" rx="20" fill="#a96a3f"/>
+    <rect x="40" y="150" width="150" height="260" rx="70" fill="url(#arm)"/>
+    <path d="M70 175 Q115 140 160 175" fill="none" stroke="#d99a68" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  </svg>
+
+  <main>
+    <!-- Логотип: дом с сердцем внутри -->
+    <svg class="logo" viewBox="0 0 80 120" aria-label="Логотип: дом с сердцем">
+      <rect x="4" y="4" width="72" height="112" rx="36"/>
+      <path d="M18 60 L40 38 L62 60 V94 H18 Z"/>
+      <path d="M50 48 V40 H56 V54"/>
+      <path d="M40 85 C30 78,26 71,31 66 C35 62,39 64,40 68 C41 64,45 62,49 66 C54 71,50 78,40 85 Z"/>
+    </svg>
+    <h1>Макпал</h1>
+    <p class="job">Дизайнер интерьера</p>
+    <a class="btn" href="https://wa.me/77075455094" target="_blank" rel="noopener">Написать мне</a>
+  </main>
+</body>
+</html>
