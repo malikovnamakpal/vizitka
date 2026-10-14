@@ -44,6 +44,19 @@
       height: auto;
       margin: 0 auto 32px;
       filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.25));
+      /* Каждые 3 секунды логотип плавно делает полный круг */
+      animation: logo-turn 3s infinite;
+    }
+    @keyframes logo-turn {
+      0% {
+        transform: rotate(0deg);
+        animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      50%, 100% { transform: rotate(360deg); }
+    }
+    /* Не крутим логотип, если в системе отключена анимация */
+    @media (prefers-reduced-motion: reduce) {
+      .logo { animation: none; }
     }
     h1 {
       margin: 0 0 18px;
@@ -94,7 +107,7 @@
   <main>
     <img class="logo" src="images/logo.png" alt="Логотип BM STUDIO">
     <h1>BM STUDIO</h1>
-    <p class="job">Дизайнер интерьера</p>
+    <p class="job">Дизайн интерьера</p>
     <a class="btn" href="https://wa.me/77075455094" target="_blank" rel="noopener">Написать мне</a>
   </main>
 </body>
